@@ -47,3 +47,15 @@ module.exports.deleteChallenge = (req, res) => {
     res.status(200).json({ message: "Challenge deleted successfully" });
   });
 };
+
+module.exports.getStats = (req, res) => {
+  const result = {};
+  let pending = 5;
+  const done = (err) => { if (err) { console.error(err); return res.status(500).json({ error: "Stats error" }); } if (--pending === 0) res.status(200).json(result); };
+
+  adminModel.getStats((err, rows) => { if (err) return done(err); Object.assign(result, rows[0]); done(); });
+  adminModel.getTopUsers((err, rows) => { if (err) return done(err); result.topUsers = rows; done(); });
+  adminModel.getChallengeCompletions((err, rows) => { if (err) return done(err); result.challengeCompletions = rows; done(); });
+  adminModel.getSuspectAccusations((err, rows) => { if (err) return done(err); result.suspectAccusations = rows; done(); });
+  adminModel.getEndingDistribution((err, rows) => { if (err) return done(err); result.endingDistribution = rows; done(); });
+};
