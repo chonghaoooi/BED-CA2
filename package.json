@@ -1,0 +1,38 @@
+{
+  "name": "bed-ca2-chonghaoooi",
+  "version": "1.0.0",
+  "description": "Detective Noir",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init_tables": "node src/configs/createSchema.js && node src/configs/initTables.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chonghaoooi/BED-CA2.git"
+  },
+  "keywords": [
+    "Dotenv",
+    "Express",
+    "mysql2",
+    "nodemon",
+    "bcrypt",
+    "jsonwebtoken"
+  ],
+  "author": "Ooi Chong Hao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chonghaoooi/BED-CA2/issues"
+  },
+  "homepage": "https://github.com/chonghaoooi/BED-CA2#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.16.1",
+    "nodemon": "^3.1.11"
+  }
+}

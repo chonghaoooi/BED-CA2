@@ -1,0 +1,374 @@
+/* chonghao.25@ichat.sp.edu.sg adminNo 2523330  DIT/FT/1B/04 */
+/* wellness.html */
+:root {
+  --home-bg: #0f1114;
+  --home-card: #1a1e24;
+  --home-border: #2d3544;
+  --home-text: #e8eaed;
+  --home-muted: #8b92a0;
+  --home-accent: #7c8aff;
+  --home-success: #81c784;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--home-bg);
+  color: var(--home-text);
+  overflow-x: hidden;
+}
+.page-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--home-bg) url("../images/bg.png") center center / cover no-repeat;
+}
+.page-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 17, 20, 0.5) 0%,
+    rgba(15, 17, 20, 0.8) 100%
+  );
+  pointer-events: none;
+}
+.page-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.wellness-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: rgba(26, 30, 36, 0.9);
+  border-bottom: 1px solid var(--home-border);
+  backdrop-filter: blur(8px);
+}
+.wellness-navbar .brand {
+  font-family: "Crimson Pro", serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--home-text);
+}
+.wellness-navbar .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.wellness-navbar .profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.4rem 0.75rem;
+  background: rgba(45, 53, 68, 0.5);
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--home-muted);
+}
+.wellness-navbar .profile strong {
+  color: var(--home-text);
+}
+.wellness-navbar .profile-points {
+  color: var(--home-accent);
+  font-weight: 600;
+}
+.wellness-navbar .link-home {
+  color: var(--home-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.wellness-navbar .link-home:hover {
+  color: var(--home-accent);
+}
+.wellness-navbar .btn-logout {
+  background: transparent;
+  color: var(--home-text);
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.wellness-navbar .btn-logout:hover {
+  background: var(--home-accent);
+  border-color: var(--home-accent);
+}
+.wellness-main {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+.wellness-main h1 {
+  font-family: "Crimson Pro", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+.wellness-main .intro {
+  color: var(--home-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+.create-challenge {
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.create-challenge h2 {
+  font-family: "Crimson Pro", serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+.create-challenge .form-group {
+  margin-bottom: 1rem;
+}
+.create-challenge label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--home-muted);
+  margin-bottom: 0.35rem;
+}
+.create-challenge input,
+.create-challenge textarea {
+  width: 100%;
+  background: var(--home-bg);
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  padding: 0.6rem 0.85rem;
+  color: var(--home-text);
+  font-size: 0.95rem;
+}
+.create-challenge input:focus,
+.create-challenge textarea:focus {
+  outline: none;
+  border-color: var(--home-accent);
+  box-shadow: 0 0 0 2px rgba(124, 138, 255, 0.2);
+}
+.create-challenge textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+.create-challenge .btn-create {
+  background: var(--home-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.create-challenge .btn-create:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+.create-challenge .btn-create:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.create-challenge .create-error {
+  color: #e57373;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+.challenge-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.challenge-card {
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.challenge-card.completed {
+  border-color: rgba(129, 199, 132, 0.4);
+  background: rgba(129, 199, 132, 0.08);
+}
+.challenge-info {
+  flex: 1;
+  min-width: 0;
+}
+.challenge-desc {
+  font-size: 0.95rem;
+  margin: 0 0 0.25rem;
+}
+.challenge-points {
+  font-size: 0.8rem;
+  color: var(--home-accent);
+  font-weight: 600;
+}
+.challenge-actions {
+  flex-shrink: 0;
+}
+.challenge-card .btn-complete {
+  background: var(--home-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.challenge-card .btn-complete:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+.challenge-card .btn-complete:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.challenge-card .badge-done {
+  background: var(--home-success);
+  color: #0f1114;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.challenge-actions .btn-edit,
+.challenge-actions .btn-delete {
+  border: none;
+  border-radius: 6px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: var(--home-border);
+  color: var(--home-text);
+}
+.challenge-actions .btn-edit:hover,
+.challenge-actions .btn-delete:hover {
+  background: var(--home-muted);
+}
+.challenge-actions .btn-delete {
+  background: rgba(229, 115, 115, 0.25);
+  color: #e57373;
+}
+.challenge-actions .btn-delete:hover {
+  background: rgba(229, 115, 115, 0.4);
+}
+.challenge-card.editing .challenge-view { display: none; }
+.challenge-card.editing .challenge-edit { display: block; }
+.challenge-card .challenge-edit { display: none; }
+.challenge-edit .form-group { margin-bottom: 0.75rem; }
+.challenge-edit label { font-size: 0.8rem; color: var(--home-muted); margin-bottom: 0.25rem; display: block; }
+.challenge-edit input,
+.challenge-edit textarea {
+  width: 100%;
+  background: var(--home-bg);
+  border: 1px solid var(--home-border);
+  border-radius: 6px;
+  padding: 0.5rem 0.65rem;
+  color: var(--home-text);
+  font-size: 0.9rem;
+}
+.challenge-edit textarea { min-height: 60px; resize: vertical; }
+.challenge-edit .edit-actions { margin-top: 0.75rem; display: flex; gap: 0.5rem; }
+.challenge-edit .btn-save { background: var(--home-accent); color: #fff; border: none; border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.85rem; cursor: pointer; }
+.challenge-edit .btn-cancel { background: var(--home-border); color: var(--home-text); border: none; border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.85rem; cursor: pointer; }
+.wellness-loading,
+.wellness-error {
+  text-align: center;
+  color: var(--home-muted);
+  padding: 2rem;
+}
+.wellness-error {
+  color: #e57373;
+}
+.completion-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.completion-modal-overlay.show {
+  display: flex;
+}
+.completion-modal {
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  max-width: 400px;
+  width: 100%;
+}
+.completion-modal h3 {
+  font-family: "Crimson Pro", serif;
+  font-size: 1.1rem;
+  margin: 0 0 1rem;
+}
+.completion-modal .form-group {
+  margin-bottom: 1rem;
+}
+.completion-modal label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--home-muted);
+  margin-bottom: 0.35rem;
+}
+.completion-modal textarea {
+  width: 100%;
+  background: var(--home-bg);
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  padding: 0.6rem;
+  color: var(--home-text);
+  font-size: 0.95rem;
+  min-height: 80px;
+  resize: vertical;
+}
+.completion-modal .modal-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.completion-modal .btn-submit-complete {
+  background: var(--home-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.completion-modal .btn-cancel-complete {
+  background: var(--home-border);
+  color: var(--home-text);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.challenge-card .completion-details {
+  font-size: 0.85rem;
+  color: var(--home-muted);
+  margin-top: 0.5rem;
+  font-style: italic;
+}

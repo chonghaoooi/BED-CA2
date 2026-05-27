@@ -1,0 +1,213 @@
+/* chonghao.25@ichat.sp.edu.sg adminNo 2523330  DIT/FT/1B/04 */
+/* leaderboard.html */
+:root {
+  --home-bg: #0f1114;
+  --home-card: #1a1e24;
+  --home-border: #2d3544;
+  --home-text: #e8eaed;
+  --home-muted: #8b92a0;
+  --home-accent: #7c8aff;
+  --home-gold: #f0c14b;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--home-bg);
+  color: var(--home-text);
+  overflow-x: hidden;
+}
+.page-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--home-bg) url("../images/bg.png") center center / cover no-repeat;
+}
+.page-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 17, 20, 0.5) 0%,
+    rgba(15, 17, 20, 0.8) 100%
+  );
+  pointer-events: none;
+}
+.page-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.lb-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: rgba(26, 30, 36, 0.9);
+  border-bottom: 1px solid var(--home-border);
+  backdrop-filter: blur(8px);
+}
+.lb-navbar .brand {
+  font-family: "Crimson Pro", serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--home-text);
+}
+.lb-navbar .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.lb-navbar .profile {
+  padding: 0.4rem 0.75rem;
+  background: rgba(45, 53, 68, 0.5);
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--home-muted);
+}
+.lb-navbar .profile strong {
+  color: var(--home-text);
+}
+.lb-navbar .profile-points {
+  color: var(--home-accent);
+  font-weight: 600;
+}
+.lb-navbar .link-home {
+  color: var(--home-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.lb-navbar .link-home:hover {
+  color: var(--home-accent);
+}
+.lb-navbar .btn-logout {
+  background: transparent;
+  color: var(--home-text);
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.lb-navbar .btn-logout:hover {
+  background: var(--home-accent);
+  border-color: var(--home-accent);
+}
+.lb-main {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+.lb-main h1 {
+  font-family: "Crimson Pro", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+.lb-main .intro {
+  color: var(--home-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+.lb-panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+.lb-panel {
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+.lb-panel h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+}
+.lb-panel .panel-subtitle {
+  font-size: 0.8rem;
+  color: var(--home-muted);
+  margin-bottom: 1rem;
+}
+.lb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.lb-table th,
+.lb-table td {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--home-border);
+}
+.lb-table th {
+  color: var(--home-muted);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.lb-table tr:last-child td {
+  border-bottom: none;
+}
+.lb-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+.lb-rank {
+  font-weight: 700;
+  color: var(--home-muted);
+  width: 2rem;
+}
+.lb-rank.gold {
+  color: var(--home-gold);
+}
+.lb-rank.silver {
+  color: #c0c0c0;
+}
+.lb-rank.bronze {
+  color: #cd7f32;
+}
+.lb-time {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: var(--home-muted);
+}
+.lb-loading,
+.lb-empty,
+.lb-error {
+  text-align: center;
+  color: var(--home-muted);
+  padding: 1.5rem;
+  font-size: 0.9rem;
+}
+.lb-error {
+  color: #e57373;
+}
+.lb-actions {
+  margin-top: 0.75rem;
+}
+.lb-refresh-btn {
+  background: var(--home-border);
+  color: var(--home-text);
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.lb-refresh-btn:hover {
+  background: var(--home-accent);
+  border-color: var(--home-accent);
+  color: #fff;
+}

@@ -1,0 +1,77 @@
+<!-- chonghao.25@ichat.sp.edu.sg adminNo 2523330  DIT/FT/1B/04 -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Detective Noir — Wellness Quests</title>
+    <link rel="icon" href="/images/sherlock.png?v=2" type="image/png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/wellness.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page-backdrop" aria-hidden="true"></div>
+    <div class="page-content">
+      <header class="wellness-navbar">
+        <span class="brand">Detective Noir</span>
+        <div class="nav-links">
+          <a href="home.html" class="link-home">← Home</a>
+          <div class="profile" id="profile">
+            <span><strong id="profileUsername">—</strong> · <span class="profile-points" id="profilePoints">0</span> pt</span>
+          </div>
+          <button type="button" class="btn-logout" id="btnLogout">Logout</button>
+        </div>
+      </header>
+
+      <main class="wellness-main" role="main">
+        <h1>Wellness Quests</h1>
+        <p class="intro">Complete challenges to earn points. Spend points in-game to open storyboxes and uncover clues.</p>
+
+        <section class="create-challenge" aria-label="Create wellness challenge">
+          <h2>Create a wellness challenge</h2>
+          <form id="createChallengeForm">
+            <div class="form-group">
+              <label for="newDescription">Description</label>
+              <textarea id="newDescription" name="description" placeholder="e.g. Take a 15-minute walk outside" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="newPoints">Points</label>
+              <input type="number" id="newPoints" name="points" min="1" max="20" value="10" required />
+            </div>
+            <div id="createError" class="create-error" hidden></div>
+            <button type="submit" class="btn-create" id="btnCreateChallenge">Create challenge</button>
+          </form>
+        </section>
+
+        <div id="challengeLoading" class="wellness-loading">Loading challenges…</div>
+        <div id="challengeError" class="wellness-error" hidden></div>
+        <div id="challengeList" class="challenge-list" hidden></div>
+      </main>
+
+      <div id="completionModalOverlay" class="completion-modal-overlay" aria-hidden="true">
+        <div class="completion-modal">
+          <h3>Describe what you did</h3>
+          <div class="form-group">
+            <label for="completionDetailsInput">Your description (required)</label>
+            <textarea id="completionDetailsInput" placeholder="e.g. Walked 15 min in the park"></textarea>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn-submit-complete" id="btnSubmitComplete">Submit</button>
+            <button type="button" class="btn-cancel-complete" id="btnCancelComplete">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/getCurrentURL.js"></script>
+    <script src="js/queryCmds.js"></script>
+    <script src="js/wellness.js"></script>
+  </body>
+</html>

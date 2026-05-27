@@ -1,0 +1,125 @@
+<!-- chonghao.25@ichat.sp.edu.sg adminNo 2523330  DIT/FT/1B/04 -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Detective Noir — Suspects & Accusation</title>
+    <link rel="icon" href="/images/sherlock.png?v=2" type="image/png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/game.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page-backdrop" aria-hidden="true"></div>
+    <div class="page-content">
+      <header class="game-navbar">
+        <span class="brand">Detective Noir</span>
+        <div class="nav-links">
+          <a href="home.html" class="nav-link">Home</a>
+          <div class="profile" id="profile">
+            <span><strong id="profileUsername">—</strong> · <span class="profile-points" id="profilePoints">0</span> pt</span>
+          </div>
+          <button type="button" class="btn-logout" id="btnLogout">Logout</button>
+        </div>
+      </header>
+      <nav class="case-nav" aria-label="Case navigation">
+        <a href="casefile.html" class="case-nav-link">Case File</a>
+        <span class="case-nav-sep">›</span>
+        <a href="case-1.html" class="case-nav-link">Case 1</a>
+        <span class="case-nav-sep">·</span>
+        <a href="investigation.html" class="case-nav-link">Investigation</a>
+        <a href="clues.html" class="case-nav-link">Evidence Board</a>
+        <a href="accusation.html" class="case-nav-link case-nav-link--current">Suspects</a>
+        <a href="ending.html" class="case-nav-link">Ending</a>
+      </nav>
+
+      <main class="game-main" role="main">
+        <h1 class="case-page-title">Suspects & Accusation</h1>
+        <p class="intro">
+          Review the suspects. When you've collected enough clues, you can name
+          your suspect. Choose carefully—you only get one shot.
+        </p>
+
+        <section class="game-section" id="suspectsSection">
+          <h2>Suspects</h2>
+          <div id="suspectsContent" class="game-loading">Loading…</div>
+        </section>
+
+        <p class="muted">
+          <a href="clues.html" class="nav-link">Review your clues →</a>
+          <a href="ending.html" class="nav-link">Your ending →</a>
+        </p>
+      </main>
+    </div>
+
+    <!-- Accusation Confirmation Modal -->
+    <div
+      class="modal fade"
+      id="accuseConfirmModal"
+      tabindex="-1"
+      aria-labelledby="accuseConfirmTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content game-modal">
+          <div class="modal-header">
+            <h5 class="modal-title" id="accuseConfirmTitle">
+              Confirm accusation
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <p class="mb-2">
+              You are about to accuse:
+              <strong id="accuseSuspectName">—</strong>
+            </p>
+            <p class="muted mb-0">
+              This is your final decision. You only get one shot.
+            </p>
+
+            <div
+              class="game-error mt-3"
+              id="accuseError"
+              style="display: none"
+            ></div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-light"
+              data-bs-dismiss="modal"
+              id="btnCancelAccuse"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-danger" id="btnConfirmAccuse">
+              Accuse
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap bundle (includes modal JS) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Page JS -->
+    <script src="js/getCurrentURL.js"></script>
+    <script src="js/queryCmds.js"></script>
+    <script src="js/accusation.js"></script>
+  </body>
+</html>

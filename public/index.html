@@ -1,0 +1,220 @@
+<!-- chonghao.25@ichat.sp.edu.sg adminNo 2523330  DIT/FT/1B/04 -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Detective Noir — Complete wellness quests, earn points, and unlock clues to solve your first case. Collect evidence, study suspects, and name the culprit." />
+    <title>Detective Noir — Solve the Mystery</title>
+    <link rel="icon" href="/images/sherlock.png?v=2" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/images/sherlock.png?v=2" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/images/sherlock.png?v=2" sizes="180x180" />
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/index.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Hero: what the game is -->
+    <section class="hero" aria-label="Game intro">
+      <div class="hero-content">
+        <p class="game-label">Wellness & Detective Gamification</p>
+        <h1>Detective Noir</h1>
+        <p class="tagline">
+          Pick a case from the Case File, complete wellness quests to earn points, then spend points at the crime scene to unlock storyboxes and clues.
+          Review your evidence, study the suspects, and make your accusation—only one is the real culprit.
+        </p>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="about-section" aria-label="How the game works">
+      <h2>How it works</h2>
+      <div class="about-cards">
+        <div class="about-card">
+          <span class="step">1</span>
+          <h3>Pick a case</h3>
+          <p>Open the Case File and select an available case to investigate.</p>
+        </div>
+        <div class="about-card">
+          <span class="step">2</span>
+          <h3>Earn points</h3>
+          <p>Complete wellness quests to earn points, then spend them at the crime scene to open storyboxes and reveal clues.</p>
+        </div>
+        <div class="about-card">
+          <span class="step">3</span>
+          <h3>Build your case</h3>
+          <p>Review your Evidence Board and study each suspect before you accuse.</p>
+        </div>
+        <div class="about-card">
+          <span class="step">4</span>
+          <h3>Name the culprit</h3>
+          <p>Make your accusation. Solve the case correctly to reach the leaderboard.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Login / Register -->
+    <section class="auth-section" aria-label="Login or register">
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button id="showLoginBtn" type="button" class="btn btn-primary">Login</button>
+          <button id="showRegisterBtn" type="button" class="btn btn-secondary">Register</button>
+        </div>
+
+        <div id="warningCard" class="d-none">
+          <div class="card-body text-danger" id="warningText"></div>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginBox">
+          <form id="loginForm">
+            <div class="mb-3">
+              <label class="form-label" for="loginUsername">Username</label>
+              <input
+                type="text"
+                id="loginUsername"
+                class="form-control"
+                placeholder="Your username"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="loginPassword">Password</label>
+              <input
+                type="password"
+                id="loginPassword"
+                class="form-control"
+                placeholder="Your password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn-submit btn-login">Login</button>
+          </form>
+        </div>
+
+        <!-- Register Form (hidden by default) -->
+        <div id="registerBox" class="d-none">
+          <form id="registerForm">
+            <div class="mb-3">
+              <label class="form-label" for="regUsername">Username</label>
+              <input
+                type="text"
+                id="regUsername"
+                class="form-control"
+                placeholder="Choose a username"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="regEmail">Email</label>
+              <input
+                type="email"
+                id="regEmail"
+                class="form-control"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="regPassword">Password</label>
+              <input
+                type="password"
+                id="regPassword"
+                class="form-control"
+                placeholder="Choose a password"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="regConfirmPassword">Confirm password</label>
+              <input
+                type="password"
+                id="regConfirmPassword"
+                class="form-control"
+                placeholder="Confirm password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn-submit btn-register">Register</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leaderboards -->
+    <section class="leaderboards-wrap" aria-label="Leaderboards">
+      <h2>Leaderboards</h2>
+      <p class="leaderboards-intro">See who solved the case fastest—or who got it wrong. Log in and finish a case to appear here.</p>
+      <div class="leaderboards">
+        <section class="panel leaderboard-panel" aria-label="Leaderboard">
+          <h2>Top solvers</h2>
+          <p class="panel-subtitle">Top 10 — fastest to name the correct culprit</p>
+          <div id="leaderboardLoading" class="leaderboard-loading">Loading…</div>
+          <div id="leaderboardError" class="leaderboard-error" hidden></div>
+          <div id="leaderboardEmpty" class="leaderboard-empty" hidden>
+            <p>No qualified completions yet.</p>
+          </div>
+          <div id="leaderboardTableWrap" class="leaderboard-table-wrap" hidden>
+            <table class="leaderboard-table" aria-label="Leaderboard rankings">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Username</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboardBody"></tbody>
+            </table>
+          </div>
+          <p class="leaderboard-actions">
+            <button type="button" id="leaderboardRefreshBtn" class="leaderboard-refresh-btn">
+              Refresh
+            </button>
+          </p>
+        </section>
+
+        <section class="panel leaderboard-panel" aria-label="The Case Remains Unsolved">
+          <h2>The case remains unsolved</h2>
+          <p class="panel-subtitle">Top 10 — fastest to accuse the wrong culprit</p>
+          <div id="unsolvedLoading" class="leaderboard-loading">Loading…</div>
+          <div id="unsolvedError" class="leaderboard-error" hidden></div>
+          <div id="unsolvedEmpty" class="leaderboard-empty" hidden>
+            <p>No wrong-culprit completions yet.</p>
+          </div>
+          <div id="unsolvedTableWrap" class="leaderboard-table-wrap" hidden>
+            <table class="leaderboard-table" aria-label="The Case Remains Unsolved rankings">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Username</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody id="unsolvedBody"></tbody>
+            </table>
+          </div>
+          <p class="leaderboard-actions">
+            <button type="button" id="unsolvedRefreshBtn" class="leaderboard-refresh-btn">
+              Refresh
+            </button>
+          </p>
+        </section>
+      </div>
+    </section>
+
+    <script src="js/getCurrentURL.js"></script>
+    <script src="js/queryCmds.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/home.js"></script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: bed-ca2-chonghaoooi
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_SSL_REJECT_AUTHORISE
+        value: "true"
+      - key: JWT_SECRET_KEY
+        sync: false
+      - key: JWT_EXPIRES_IN
+        value: "15m"
+      - key: JWT_ALGORITHM
+        value: "HS256"

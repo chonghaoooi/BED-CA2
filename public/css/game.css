@@ -1,0 +1,1049 @@
+/* chonghao.25@ichat.sp.edu.sg adminNo 2523330  DIT/FT/1B/04 */
+/* Shared styles for case file game pages (hub, investigation, clues, accusation, ending) */
+:root {
+  --game-bg: #0f1114;
+  --game-card: #1a1e24;
+  --game-border: #2d3544;
+  --game-text: #e8eaed;
+  --game-muted: #8b92a0;
+  --game-accent: #7c8aff;
+  --game-danger: #e57373;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--game-bg);
+  color: var(--game-text);
+  overflow-x: hidden;
+}
+
+.page-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--game-bg) url("../images/bg.png") center center / cover
+    no-repeat;
+}
+.page-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 17, 20, 0.5) 0%,
+    rgba(15, 17, 20, 0.85) 100%
+  );
+  pointer-events: none;
+}
+.page-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar (all game pages) */
+.game-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: rgba(26, 30, 36, 0.9);
+  border-bottom: 1px solid var(--game-border);
+  backdrop-filter: blur(8px);
+}
+.game-navbar .brand {
+  font-family: "Crimson Pro", serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--game-text);
+}
+.game-navbar .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.game-navbar .profile {
+  padding: 0.4rem 0.75rem;
+  background: rgba(45, 53, 68, 0.5);
+  border: 1px solid var(--game-border);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--game-muted);
+}
+.game-navbar .profile strong {
+  color: var(--game-text);
+}
+.game-navbar .profile-points {
+  color: var(--game-accent);
+  font-weight: 600;
+}
+.game-navbar .nav-link {
+  color: var(--game-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.game-navbar .nav-link:hover {
+  color: var(--game-accent);
+}
+.game-navbar .btn-logout {
+  background: transparent;
+  color: var(--game-text);
+  border: 1px solid var(--game-border);
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.game-navbar .btn-logout:hover {
+  background: var(--game-accent);
+  border-color: var(--game-accent);
+}
+
+/* Case navigation (open case pages: case-1, investigation, clues, accusation, ending) */
+.case-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem 0;
+  padding: 0.6rem 1.5rem;
+  background: rgba(30, 34, 44, 0.95);
+  border-bottom: 1px solid var(--game-border);
+  font-size: 0.9rem;
+}
+.case-nav-link {
+  color: var(--game-muted);
+  text-decoration: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+.case-nav-link:hover {
+  color: var(--game-accent);
+  background: rgba(124, 138, 255, 0.12);
+}
+.case-nav-link--current {
+  color: var(--game-text);
+  font-weight: 600;
+  background: rgba(124, 138, 255, 0.2);
+}
+.case-nav-link--current:hover {
+  color: var(--game-text);
+  background: rgba(124, 138, 255, 0.25);
+}
+.case-nav-sep {
+  color: var(--game-muted);
+  opacity: 0.6;
+  font-size: 0.75rem;
+  margin: 0 0.15rem;
+  user-select: none;
+}
+
+/* Main content */
+.game-main {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+.game-main h1 {
+  font-family: "Crimson Pro", serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--game-text);
+}
+.game-main .intro,
+.game-main .muted {
+  color: var(--game-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+/* Case list – multiple cases (1 active, rest locked) */
+.case-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.case-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  padding: 1rem 0.75rem;
+  background: var(--game-card);
+  border: 2px solid var(--game-border);
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.15s;
+  position: relative;
+}
+.case-card--active {
+  border-color: var(--game-accent);
+  background: rgba(124, 138, 255, 0.08);
+}
+.case-card--active:hover {
+  border-color: var(--game-accent);
+  background: rgba(124, 138, 255, 0.12);
+  transform: translateY(-2px);
+}
+.case-card--locked {
+  opacity: 0.85;
+  cursor: not-allowed;
+  pointer-events: none;
+  border-style: dashed;
+}
+.case-card--locked .case-card-chain {
+  display: block;
+  font-size: 1.25rem;
+  margin-bottom: 0.35rem;
+  filter: grayscale(0.4);
+}
+.case-card-number {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--game-muted);
+  margin-bottom: 0.25rem;
+}
+.case-card-title {
+  font-family: "Crimson Pro", serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--game-text);
+  line-height: 1.25;
+}
+.case-card-status {
+  font-size: 0.7rem;
+  color: var(--game-accent);
+  font-weight: 600;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.case-card-timer {
+  font-size: 0.7rem;
+  color: var(--game-muted);
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+.case-content {
+  margin-top: 0.5rem;
+}
+.case-content-heading {
+  font-family: "Crimson Pro", serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: var(--game-text);
+}
+
+/* Case Hub – clickable cards */
+.game-hub .hub-summary {
+  background: var(--game-card);
+  border: 1px solid var(--game-border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+}
+.game-hub .hub-summary strong {
+  color: var(--game-accent);
+}
+.hub-cards {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.hub-card {
+  display: block;
+  background: var(--game-card);
+  border: 2px solid var(--game-border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.15s;
+}
+.hub-card:hover {
+  border-color: var(--game-accent);
+  background: rgba(124, 138, 255, 0.08);
+  transform: translateY(-2px);
+}
+.hub-card h2 {
+  font-family: "Crimson Pro", serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem 0;
+  color: var(--game-text);
+}
+.hub-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--game-muted);
+}
+.hub-card .hub-card-arrow {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--game-accent);
+}
+.hub-card .hub-card-image {
+  display: block;
+  margin: -1.25rem -1.5rem 1rem -1.5rem;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  max-height: 120px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.hub-card .hub-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 120px;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Evidence Board card: text on image, image zooms on hover */
+.hub-card--evidence {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  min-height: 180px;
+}
+.hub-card--evidence .hub-card-image {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  max-height: none;
+  height: 100%;
+  border-radius: 12px;
+}
+.hub-card--evidence .hub-card-image img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+.hub-card--evidence:hover .hub-card-image img {
+  transform: scale(1.08);
+}
+.hub-card--evidence .hub-card-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.5) 60%,
+    transparent
+  );
+  color: #fff;
+  pointer-events: none;
+}
+.hub-card--evidence .hub-card-overlay h2 {
+  color: #fff;
+  margin: 0 0 0.25rem 0;
+}
+.hub-card--evidence .hub-card-overlay p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  margin: 0;
+}
+.hub-card--evidence .hub-card-overlay .hub-card-arrow {
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+}
+
+/* Sections (investigation, clues, accusation) */
+.game-section {
+  background: var(--game-card);
+  border: 1px solid var(--game-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+.game-section h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  color: var(--game-text);
+}
+.game-section .muted {
+  font-size: 0.85rem;
+  color: var(--game-muted);
+}
+.case-synopsis {
+  background: rgba(124, 138, 255, 0.06);
+  border-color: var(--game-accent);
+}
+.case-synopsis p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--game-text);
+}
+
+/* Clues list */
+.game-clue {
+  border-left: 3px solid var(--game-accent);
+  padding-left: 0.75rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.game-clue .clue-image-wrap {
+  flex-shrink: 0;
+  width: 140px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--game-border);
+}
+.game-clue .clue-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.game-clue .clue-name {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  flex: 1 1 100%;
+}
+.game-clue .clue-type {
+  font-size: 0.8rem;
+  color: var(--game-muted);
+  margin-bottom: 0.25rem;
+}
+.game-clue .clue-desc {
+  font-size: 0.9rem;
+  flex: 1 1 280px;
+}
+
+/* Evidence Board – single line 1×5 across the screen, big images, locked greyed */
+.clues-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-top: 1rem;
+  width: 100%;
+  min-width: 0;
+}
+.clues-row .game-clue--card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  border-left: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 0;
+  background: transparent;
+  transition: transform 0.15s;
+  text-align: center;
+}
+.clues-row .game-clue--card:not(.game-clue--locked):hover {
+  transform: translateY(-4px);
+}
+.clues-row .game-clue--card .clue-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  margin-bottom: 0.75rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--game-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+.clues-row .game-clue--card .clue-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.clues-row .game-clue--card .clue-locked-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(45, 53, 68, 0.85);
+  color: rgba(232, 234, 237, 0.55);
+  font-size: 3rem;
+  font-weight: 700;
+}
+.clues-row .game-clue--card .clue-title-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.5));
+  text-align: center;
+}
+.clues-row .game-clue--card .clue-type {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--game-muted);
+  margin: 0 0 0.5rem 0;
+}
+.clues-row .game-clue--card .clue-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  color: var(--game-text);
+}
+.clues-row .game-clue--locked .clue-image-wrap {
+  filter: grayscale(0.85);
+  opacity: 0.85;
+}
+.clues-row .game-clue--locked .clue-name,
+.clues-row .game-clue--locked .clue-type {
+  color: var(--game-muted);
+}
+
+/* Clue modal – click to view full details */
+.clue-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+}
+.clue-modal-card {
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  background: var(--game-card);
+  border: 2px solid var(--game-accent);
+  border-radius: 12px;
+  padding: 2rem;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.clue-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--game-text);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.clue-modal-close:hover {
+  opacity: 1;
+}
+.clue-modal-image-wrap {
+  width: 100%;
+  max-height: 400px;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--game-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+.clue-modal-image {
+  width: 100%;
+  height: 100%;
+  max-height: 400px;
+  object-fit: contain;
+}
+.clue-modal-name {
+  font-family: "Crimson Pro", serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: var(--game-text);
+}
+.clue-modal-type {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--game-accent);
+  margin: 0 0 1rem 0;
+}
+.clue-modal-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--game-text);
+  margin: 0;
+}
+
+/* Investigation – clue reveal modal (when user gets a new clue) */
+.clue-reveal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+  animation: clueRevealBgIn 0.3s ease-out;
+}
+.clue-reveal-overlay.clue-reveal-visible .clue-reveal-card {
+  animation: clueRevealCardIn 0.4s ease-out;
+}
+@keyframes clueRevealBgIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes clueRevealCardIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.clue-reveal-card {
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--game-card) 0%,
+    rgba(30, 32, 42, 0.98) 100%
+  );
+  border: 2px solid var(--game-accent);
+  border-radius: 14px;
+  padding: 1.75rem;
+  text-align: center;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(124, 138, 255, 0.2);
+}
+.clue-reveal-headline {
+  font-family: "Crimson Pro", serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--game-accent);
+  margin: 0 0 1rem 0;
+}
+.clue-reveal-content {
+  margin-bottom: 1.25rem;
+}
+.clue-reveal-image-wrap {
+  width: 100%;
+  max-height: 220px;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--game-border);
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.clue-reveal-image {
+  width: 100%;
+  height: 100%;
+  max-height: 220px;
+  object-fit: contain;
+}
+.clue-reveal-name {
+  font-family: "Crimson Pro", serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem 0;
+  color: var(--game-text);
+}
+.clue-reveal-type {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--game-muted);
+  margin: 0 0 0.5rem 0;
+}
+.clue-reveal-tagline {
+  font-size: 0.9rem;
+  color: var(--game-muted);
+  font-style: italic;
+  margin: 0;
+}
+.clue-reveal-view {
+  display: inline-block;
+  text-decoration: none;
+  margin-right: 0.75rem;
+}
+.clue-reveal-close {
+  background: transparent;
+  color: var(--game-muted);
+  border: 1px solid var(--game-border);
+  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.clue-reveal-close:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--game-text);
+}
+
+/* Suspects – evidence-board style (same layout as clues) */
+.suspects-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-top: 1rem;
+  width: 100%;
+  min-width: 0;
+}
+.suspects-row .game-suspect--card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 0;
+  background: transparent;
+  transition: transform 0.15s;
+  text-align: center;
+}
+.suspects-row .game-suspect--card:hover {
+  transform: translateY(-4px);
+}
+.suspects-row .game-suspect--card .suspect-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  margin-bottom: 0.75rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--game-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+.suspects-row .game-suspect--card .suspect-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.suspects-row .game-suspect--card .suspect-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(45, 53, 68, 0.8);
+  color: var(--game-muted);
+  font-size: 3rem;
+  font-weight: 700;
+}
+.suspects-row .game-suspect--card .suspect-title-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.5));
+  text-align: center;
+}
+.suspects-row .game-suspect--card .suspect-alias {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--game-muted);
+  margin: 0 0 0.2rem 0;
+}
+.suspects-row .game-suspect--card .suspect-status {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--game-muted);
+  margin: 0 0 0.5rem 0;
+}
+.suspects-row .game-suspect--card .btn-accuse {
+  margin-top: 0.25rem;
+  background: var(--game-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.suspects-row .game-suspect--card .btn-accuse:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+.suspects-row .game-suspect--card .btn-accuse:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+@media (max-width: 900px) {
+  .suspects-row {
+    grid-template-columns: repeat(5, minmax(120px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* Suspect modal – click image for bio */
+.suspect-modal-overlay .suspect-modal-content .clue-modal-image-wrap {
+  max-height: 280px;
+}
+.suspect-modal-alibi {
+  font-size: 0.9rem;
+  color: var(--game-muted);
+  margin: 0.75rem 0 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--game-border);
+}
+
+/* Suspects (legacy list fallback) */
+.game-suspect {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--game-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.game-suspect:last-child {
+  border-bottom: none;
+}
+.game-suspect .suspect-image-wrap {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--game-border);
+}
+.game-suspect .suspect-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.game-suspect .suspect-name {
+  font-weight: 600;
+  flex: 1 1 100%;
+}
+.game-suspect .suspect-alias {
+  font-size: 0.85rem;
+  color: var(--game-muted);
+}
+.game-suspect .suspect-bio {
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+  flex: 1 1 280px;
+}
+.game-suspect .btn-accuse {
+  margin-top: 0.5rem;
+  background: var(--game-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.game-suspect .btn-accuse:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+.game-suspect .btn-accuse:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Ending */
+.game-ending {
+  background: rgba(124, 138, 255, 0.08);
+  border: 1px solid var(--game-accent);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+.game-ending.ending--correct {
+  background: rgba(129, 199, 132, 0.12);
+  border-color: #81c784;
+}
+.game-ending.ending--wrong {
+  background: rgba(229, 115, 115, 0.12);
+  border-color: #e57373;
+}
+.game-ending .ending-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+.game-ending.ending--correct .ending-title {
+  color: #81c784;
+}
+.game-ending.ending--wrong .ending-title {
+  color: #e57373;
+}
+.ending-badge {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  display: inline-block;
+}
+.ending-badge--correct {
+  background: rgba(129, 199, 132, 0.25);
+  color: #81c784;
+}
+.ending-badge--wrong {
+  background: rgba(229, 115, 115, 0.25);
+  color: #e57373;
+}
+.game-ending .ending-desc {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--game-text);
+  margin: 0;
+}
+
+/* Buttons */
+.btn-primary-game {
+  background: var(--game-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-primary-game:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+.btn-primary-game:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.btn-reset-game {
+  background: transparent;
+  color: var(--game-danger);
+  border: 1px solid rgba(229, 115, 115, 0.5);
+  border-radius: 8px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+.btn-reset-game:hover {
+  background: rgba(229, 115, 115, 0.15);
+  color: var(--game-danger);
+}
+
+.game-loading {
+  text-align: center;
+  color: var(--game-muted);
+  padding: 1rem;
+}
+.game-error {
+  color: var(--game-danger);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+/* Breadcrumb / back strip */
+.game-back-strip {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+.game-back-strip a {
+  color: var(--game-muted);
+  text-decoration: none;
+}
+.game-back-strip a:hover {
+  color: var(--game-accent);
+}
+.game-back-strip span {
+  color: var(--game-muted);
+  margin: 0 0.35rem;
+}
+
+/* Accusation confirm modal (match game theme) */
+.game-modal.modal-content {
+  background: var(--game-card);
+  border: 1px solid var(--game-border);
+  color: var(--game-text);
+}
+.game-modal .modal-header {
+  border-bottom: 1px solid var(--game-border);
+}
+.game-modal .modal-footer {
+  border-top: 1px solid var(--game-border);
+}

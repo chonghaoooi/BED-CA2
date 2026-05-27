@@ -1,0 +1,126 @@
+/* chonghao.25@ichat.sp.edu.sg adminNo 2523330  DIT/FT/1B/04 */
+/* casefile.html – case file page */
+:root {
+  --home-bg: #0f1114;
+  --home-card: #1a1e24;
+  --home-border: #2d3544;
+  --home-text: #e8eaed;
+  --home-muted: #8b92a0;
+  --home-accent: #7c8aff;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--home-bg);
+  color: var(--home-text);
+  overflow-x: hidden;
+}
+.page-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--home-bg) url("../images/bg.png") center center / cover no-repeat;
+}
+.page-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(15,17,20,0.5) 0%, rgba(15,17,20,0.8) 100%);
+  pointer-events: none;
+}
+.page-content { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; }
+.cf-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: rgba(26,30,36,0.9);
+  border-bottom: 1px solid var(--home-border);
+  backdrop-filter: blur(8px);
+}
+.cf-navbar .brand { font-family: "Crimson Pro", serif; font-weight: 700; font-size: 1.2rem; color: var(--home-text); }
+.cf-navbar .nav-links { display: flex; align-items: center; gap: 1rem; }
+.cf-navbar .profile {
+  padding: 0.4rem 0.75rem;
+  background: rgba(45,53,68,0.5);
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--home-muted);
+}
+.cf-navbar .profile strong { color: var(--home-text); }
+.cf-navbar .profile-points { color: var(--home-accent); font-weight: 600; }
+.cf-navbar .link-home { color: var(--home-muted); text-decoration: none; font-size: 0.9rem; }
+.cf-navbar .link-home:hover { color: var(--home-accent); }
+.cf-navbar .btn-logout {
+  background: transparent;
+  color: var(--home-text);
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.cf-navbar .btn-logout:hover { background: var(--home-accent); border-color: var(--home-accent); }
+.cf-main { flex: 1; padding: 1.5rem; max-width: 720px; margin: 0 auto; width: 100%; }
+.cf-main h1 { font-family: "Crimson Pro", serif; font-size: 1.5rem; font-weight: 700; margin: 0 0 1rem; }
+.cf-main .intro { color: var(--home-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
+.cf-section {
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+.cf-section h2 { font-size: 1rem; font-weight: 600; margin: 0 0 0.75rem; }
+.cf-section .muted { font-size: 0.85rem; color: var(--home-muted); }
+.cf-clue { border-left: 3px solid var(--home-accent); padding-left: 0.75rem; margin-bottom: 1rem; }
+.cf-clue .clue-name { font-weight: 600; margin-bottom: 0.25rem; }
+.cf-clue .clue-type { font-size: 0.8rem; color: var(--home-muted); margin-bottom: 0.25rem; }
+.cf-clue .clue-desc { font-size: 0.9rem; }
+.cf-suspect { padding: 0.75rem 0; border-bottom: 1px solid var(--home-border); }
+.cf-suspect:last-child { border-bottom: none; }
+.cf-suspect .suspect-name { font-weight: 600; }
+.cf-suspect .suspect-alias { font-size: 0.85rem; color: var(--home-muted); }
+.cf-suspect .suspect-bio { font-size: 0.9rem; margin-top: 0.35rem; }
+.cf-suspect .btn-accuse {
+  margin-top: 0.5rem;
+  background: var(--home-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.cf-suspect .btn-accuse:hover:not(:disabled) { filter: brightness(1.1); }
+.cf-suspect .btn-accuse:disabled { opacity: 0.6; cursor: not-allowed; }
+.cf-ending { background: rgba(124,138,255,0.08); border-color: var(--home-accent); }
+.cf-ending .ending-title { font-weight: 700; margin-bottom: 0.5rem; }
+.btn-open-storybox {
+  background: var(--home-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-open-storybox:hover:not(:disabled) { filter: brightness(1.1); }
+.btn-open-storybox:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-reset {
+  background: transparent;
+  color: #e57373;
+  border: 1px solid rgba(229,115,115,0.5);
+  border-radius: 8px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.btn-reset:hover { background: rgba(229,115,115,0.15); }
+.cf-loading { text-align: center; color: var(--home-muted); padding: 1rem; }
+.cf-error { color: #e57373; font-size: 0.85rem; margin-top: 0.5rem; }

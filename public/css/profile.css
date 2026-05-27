@@ -1,0 +1,243 @@
+/* chonghao.25@ichat.sp.edu.sg adminNo 2523330  DIT/FT/1B/04 */
+/* profile.html – edit username only */
+:root {
+  --home-bg: #0f1114;
+  --home-card: #1a1e24;
+  --home-border: #2d3544;
+  --home-text: #e8eaed;
+  --home-muted: #8b92a0;
+  --home-accent: #7c8aff;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--home-bg);
+  color: var(--home-text);
+  overflow-x: hidden;
+}
+
+.page-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--home-bg) url("../images/bg.png") center center / cover no-repeat;
+}
+.page-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 17, 20, 0.4) 0%,
+    rgba(15, 17, 20, 0.7) 100%
+  );
+  pointer-events: none;
+}
+
+.page-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: rgba(26, 30, 36, 0.85);
+  border-bottom: 1px solid var(--home-border);
+  backdrop-filter: blur(8px);
+}
+.profile-navbar .brand {
+  font-family: "Crimson Pro", serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--home-text);
+}
+.profile-navbar .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.profile-navbar .link-home {
+  color: var(--home-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.profile-navbar .link-home:hover {
+  color: var(--home-accent);
+}
+.profile-navbar .btn-logout {
+  background: transparent;
+  color: var(--home-text);
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.profile-navbar .btn-logout:hover {
+  background: var(--home-accent);
+  border-color: var(--home-accent);
+}
+
+.profile-main {
+  flex: 1;
+  padding: 2rem 1.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
+}
+.profile-main h1 {
+  font-family: "Crimson Pro", serif;
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--home-text);
+}
+.profile-main .intro {
+  color: var(--home-muted);
+  font-size: 0.95rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.profile-stats-card {
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.profile-stats-title {
+  font-family: "Crimson Pro", serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--home-text);
+  margin: 0 0 1rem 0;
+}
+.profile-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+.profile-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.profile-stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--home-muted);
+}
+.profile-stat-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--home-text);
+}
+.profile-stat--ending .profile-stat-value {
+  font-size: 0.95rem;
+}
+.profile-stat-ending--correct {
+  color: #81c784;
+}
+.profile-stat-ending--wrong {
+  color: var(--home-muted);
+}
+.profile-edit-title {
+  font-family: "Crimson Pro", serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--home-text);
+  margin: 0 0 0.35rem 0;
+}
+.profile-edit-intro {
+  font-size: 0.85rem;
+  color: var(--home-muted);
+  margin: 0 0 1rem 0;
+}
+
+.profile-card {
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+.profile-card label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--home-muted);
+  margin-bottom: 0.5rem;
+}
+.profile-card input[type="text"] {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--home-text);
+  background: rgba(45, 53, 68, 0.5);
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.profile-card input[type="text"]:focus {
+  outline: none;
+  border-color: var(--home-accent);
+  box-shadow: 0 0 0 2px rgba(124, 138, 255, 0.25);
+}
+.profile-card input[type="text"]::placeholder {
+  color: var(--home-muted);
+}
+
+.form-error {
+  color: #e57373;
+  font-size: 0.9rem;
+  margin: 0 0 1rem 0;
+}
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.btn-save {
+  background: var(--home-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-save:hover {
+  opacity: 0.9;
+}
+.btn-save:active {
+  transform: scale(0.98);
+}
+.btn-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.btn-cancel {
+  color: var(--home-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.btn-cancel:hover {
+  color: var(--home-text);
+}
