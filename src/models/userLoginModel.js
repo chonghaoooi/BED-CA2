@@ -20,7 +20,7 @@ module.exports.checkUsernameOrEmailExist = (data, callback) => {
 // Insert: create a new Userlogin record.
 module.exports.register = (data, callback) => {
   const SQLSTATMENT = `
-    INSERT INTO UserLogin (username, email, password)
+    INSERT INTO Userlogin (username, email, password)
     VALUES (?, ?, ?)
     `;
   const VALUES = [data.username, data.email, data.password];
