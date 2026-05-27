@@ -22,6 +22,7 @@ const accusationRoutes = require("./accusationRoutes");
 const endingRoutes = require("./endingRoutes");
 const progressRoutes = require("./progressRoutes");
 const leaderboardRoutes = require("./leaderboardRoutes");
+const adminRoutes = require("./adminRoutes");
 
 //////////////////////////////////////////////////////
 // DEFINE ROUTES
@@ -57,6 +58,7 @@ router.use("/ending", endingRoutes);
 router.use("/progress", progressRoutes);
 
 router.use("/leaderboard", leaderboardRoutes);
+router.use("/admin", adminRoutes);
 //////////////////////////////////////////////////////
 // EXPORT ROUTER
 //////////////////////////////////////////////////////
